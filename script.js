@@ -28,5 +28,8 @@ const displaySection = section => {
     section.classList.remove('hidden');
 }
 
-debugger;
-const displayOrCloseForm = () => displaySection(mainSection.classList.contains('hidden') ? mainSection : formSection);
+const displayOrCloseForm = () => {
+    mainSection.classList.toggle('hidden');
+    formSection.classList.toggle('hidden');
+}
+// const displayOrCloseForm = () => displaySection(mainSection.classList.contains('hidden') ? mainSection : formSection);
