@@ -42,15 +42,9 @@ const displaySection = section => {
     section.classList.remove('hidden');
 }
 
-const displayOrCloseForm = () => {
-    mainSection.classList.toggle('hidden');
-    formSection.classList.toggle('hidden');
-}
+const displayOrCloseForm = () => displaySection(mainSection.classList.contains('hidden') ? mainSection : formSection);
 
-const displayOrHideCategory = () => {
-    mainSection.classList.toggle('hidden');
-    bookmarkListSection.classList.toggle('hidden');
-}
+const displayOrHideCategory = () => displaySection(mainSection.classList.contains('hidden') ? mainSection : bookmarkListSection);
 
 addBookmarkButton.addEventListener('click', (e) => {
     Array.from(categoryNames).forEach(el => el.textContent = categoryDropdown.value);
@@ -92,12 +86,3 @@ deleteBookmarkButton.addEventListener('click', (e) => {
     setBookmarks(bookmarks);
     categoryList.innerHTML = renderBookmarks();
 });
-
-// const displayOrCloseForm = () => displaySection(mainSection.classList.contains('hidden') ? mainSection : formSection);
-
-
-
-
-
-
-
