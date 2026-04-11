@@ -84,6 +84,7 @@ closeListButton.addEventListener('click', displayOrHideCategory);
 deleteBookmarkButton.addEventListener('click', (e) => {
     const bookmarks = getBookmarks();
     const checked = document.querySelector('input[type="radio"]:checked');
+    if (!checked) return;
     const index = bookmarks.findIndex(({ name, category }) => name === checked.value && category === categoryDropdown.value);
     if (index === -1) return;
     bookmarks.splice(index, 1);
