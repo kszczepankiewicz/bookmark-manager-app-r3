@@ -11,6 +11,8 @@ const addBookmarkButton = document.getElementById('add-bookmark-button');
 const addBookmarkButtonForm = document.getElementById('add-bookmark-button-form');
 const closeFormButton = document.getElementById('close-form-button');
 const viewCategoryButton = document.getElementById('view-category-button');
+const closeListButton = document.getElementById('close-list-button');
+const deleteBookmarkButton = document.getElementById('delete-bookmark-button');
 
 const categoryNames = document.getElementsByClassName('category-name');
 
@@ -76,14 +78,22 @@ const renderBookmarks = () => getBookmarks().filter(({ category }) => category =
 
 viewCategoryButton.addEventListener('click', (e) => {
     displayOrHideCategory();
-    debugger
     categoryList.innerHTML = renderBookmarks();
+});
 
+closeListButton.addEventListener('click', displayOrHideCategory);
 
+deleteBookmarkButton.addEventListener('click', (e) => {
+    const bookmarks = getBookmarks();
+    const checked = document.querySelector('input[type="radio"]:checked');
+    const index = bookmarks.findIndex(({ name, category }) => name === checked.value && category === categoryDropdown.value);
+    if (index === -1) return;
+    bookmarks.splice(index, 1);
+    setBookmarks(bookmarks);
+    categoryList.innerHTML = renderBookmarks();
 });
 
 // const displayOrCloseForm = () => displaySection(mainSection.classList.contains('hidden') ? mainSection : formSection);
-// const checked = document.querySelector('input[type="radio"]:checked');
 
 
 
