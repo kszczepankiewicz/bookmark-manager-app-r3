@@ -56,6 +56,10 @@ closeFormButton.addEventListener('click', displayOrCloseForm);
 const setBookmarks = bookmarks => localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
 
 addBookmarkButtonForm.addEventListener('click', (e) => {
+    if (!nameEl.value || !url.value) {
+        alert('Name and value cannot be empty.');
+        return;
+    }
     const bookmarks = getBookmarks();
     bookmarks.push({ name: nameEl.value, url: url.value, category: categoryDropdown.value });
     setBookmarks(bookmarks);
