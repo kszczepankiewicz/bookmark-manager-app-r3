@@ -68,7 +68,7 @@ addBookmarkButtonForm.addEventListener('click', (e) => {
     displayOrCloseForm();
 });
 
-const renderBookmarks = () => getBookmarks().filter(({ category }) => category === categoryDropdown.value).map(({ name, url }) => {
+const renderBookmarks = () => categoryList.innerHTML = getBookmarks().filter(({ category }) => category === categoryDropdown.value).map(({ name, url }) => {
     const input = `<input type='radio' id='${name}' value='${name}' name='${categoryDropdown.value}'>`;
     const label = `<label for='${name}'><a href='${url}'>${name}</a></label>`;
     return input + label;
@@ -76,7 +76,7 @@ const renderBookmarks = () => getBookmarks().filter(({ category }) => category =
 
 viewCategoryButton.addEventListener('click', (e) => {
     displayOrHideCategory();
-    categoryList.innerHTML = renderBookmarks();
+    renderBookmarks();
 });
 
 closeListButton.addEventListener('click', displayOrHideCategory);
@@ -88,5 +88,5 @@ deleteBookmarkButton.addEventListener('click', (e) => {
     if (index === -1) return;
     bookmarks.splice(index, 1);
     setBookmarks(bookmarks);
-    categoryList.innerHTML = renderBookmarks();
+    renderBookmarks();
 });
