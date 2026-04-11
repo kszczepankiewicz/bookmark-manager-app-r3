@@ -1,14 +1,16 @@
 const mainSection = document.getElementById('main-section');
 const formSection = document.getElementById('form-section');
-const bookmarkListSection = document.getElementById('bookrmark-list-section');
+const bookmarkListSection = document.getElementById('bookmark-list-section');
 
 const nameEl = document.getElementById('name');
 const url = document.getElementById('url');
 const categoryDropdown = document.getElementById('category-dropdown');
+const categoryList = document.getElementById('category-list');
 
 const addBookmarkButton = document.getElementById('add-bookmark-button');
 const addBookmarkButtonForm = document.getElementById('add-bookmark-button-form');
 const closeFormButton = document.getElementById('close-form-button');
+const viewCategoryButton = document.getElementById('view-category-button');
 
 const categoryNames = document.getElementsByClassName('category-name');
 
@@ -43,6 +45,11 @@ const displayOrCloseForm = () => {
     formSection.classList.toggle('hidden');
 }
 
+const displayOrHideCategory = () => {
+    mainSection.classList.toggle('hidden');
+    bookmarkListSection.classList.toggle('hidden');
+}
+
 addBookmarkButton.addEventListener('click', (e) => {
     Array.from(categoryNames).forEach(el => el.textContent = categoryDropdown.value);
     displayOrCloseForm();
@@ -59,6 +66,16 @@ addBookmarkButtonForm.addEventListener('click', (e) => {
     nameEl.value = '';
     url.value = '';
     displayOrCloseForm();
+});
+
+const renderBookmarks = () => getBookmarks().filter(({ category }) => category === categoryDropdown.value).map(({ name, url }) => `<input type='radio' id='${name}' value='${name}' name='${categoryDropdown.value}'>`).join('\n') || '<p>No Bookmarks Found</p>';
+
+viewCategoryButton.addEventListener('click', (e) => {
+    displayOrHideCategory();
+    debugger
+    categoryList.innerHTML = renderBookmarks();
+
+
 });
 
 // const displayOrCloseForm = () => displaySection(mainSection.classList.contains('hidden') ? mainSection : formSection);
