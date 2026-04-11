@@ -68,7 +68,11 @@ addBookmarkButtonForm.addEventListener('click', (e) => {
     displayOrCloseForm();
 });
 
-const renderBookmarks = () => getBookmarks().filter(({ category }) => category === categoryDropdown.value).map(({ name, url }) => `<input type='radio' id='${name}' value='${name}' name='${categoryDropdown.value}'>`).join('\n') || '<p>No Bookmarks Found</p>';
+const renderBookmarks = () => getBookmarks().filter(({ category }) => category === categoryDropdown.value).map(({ name, url }) => {
+    const input = `<input type='radio' id='${name}' value='${name}' name='${categoryDropdown.value}'>`;
+    const label = `<label for='${name}'><a href='${url}'>${name}</a></label>`;
+    return input + label;
+}).join('\n') || '<p>No Bookmarks Found</p>';
 
 viewCategoryButton.addEventListener('click', (e) => {
     displayOrHideCategory();
